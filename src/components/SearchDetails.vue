@@ -1,7 +1,9 @@
 <template>
     <form @submit="search">
-        <input type="text" v-model="context"/>
-        <i class="fa fa-search" @click="search()"></i>
+        <div>
+            <input type="text" v-model="context"/>
+            <i class="fa fa-search" @click="search()"></i>
+        </div>
         <select v-model="searchType">
             <option value="0">水果</option>
             <option value="1">蔬菜</option>
@@ -34,13 +36,19 @@
 
 <style scoped lang="scss">
     form {
-        width: calc(100% - 50px);
+        width: calc(100% - 60px);
         display: inline-block;
+        float: left;
+        div {
+            width: 34%;
+            float: left;
+            position: relative;
+        }
     }
 
     i {
-        position: relative;
-        left: -50px;
+        position: absolute;
+        right: -28px;
         top: 6px;
         cursor: pointer;
     }
@@ -48,7 +56,7 @@
     input {
         float: left;
         height: 30px;
-        width: 160px;
+        width: 100%;
         border-radius: 15px;
         border: 1px solid #999;
         outline: none;

@@ -1,13 +1,12 @@
 <template>
     <div class="details">
-        <GoBack></GoBack>
-        <searchDetails :msg="context"></searchDetails>
+        <div class="searchNav">
+            <GoBack></GoBack>
+            <searchDetails :msg="context"></searchDetails>
+        </div>
         <div class="items">
-            <ItemInfo></ItemInfo>
-            <ItemInfo></ItemInfo>
-            <ItemInfo></ItemInfo>
-            <ItemInfo></ItemInfo>
-            <ItemInfo></ItemInfo>
+            <ItemInfo v-for="(item, index) in 7" @changed="changed"
+                      :index="index" :isOpera=isOpera></ItemInfo>
         </div>
     </div>
 </template>
@@ -19,10 +18,7 @@
 
     export default {
         data: function () {
-            return {context: null};
-        },
-        props: {
-            msg: null
+            return {context: null, isOpera: false};
         },
         components: {
             searchDetails,
@@ -31,16 +27,28 @@
         },
         created: function () {
             this.context = this.$route.params.context;
-            console.log(this.context);
         },
         methods: {
             search: function () {
 
+            },
+            changed: function (val) {
+                this.isOpera = val;
             }
         }
     }
 </script>
 
 <style scoped lang="scss">
-
+    .searchNav{
+        width: 100%;
+        position: fixed;
+        top: 0;
+        background-color: #ffffff;
+        padding-top: 8px;
+        z-index: 100;
+    }
+    .items{
+        padding-top: 40px;
+    }
 </style>

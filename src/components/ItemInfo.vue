@@ -8,9 +8,19 @@
             <span class="price">原价<i>5.8</i>元</span>
             <span class="activePrice">优惠价格<i>3.8</i>元</span>
         </div>
-        <div class="operationDiv">
-
-        </div>
+        <div class="operationDiv" v-if="isSelected"></div>
+        <transition name="slide-fade">
+            <div v-if="isSelected" class="operation">
+                <div class="join">
+                    <div class="fa fa-heart" style="color: red"></div>
+                    <div>参加</div>
+                </div>
+                <div class="join">
+                    <div class="fa fa-star" style="color: #4395ff;"></div>
+                    <div>查看活动</div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -18,15 +28,18 @@
     export default {
         name: 'ItemInfo',
         data: function () {
-            return {context: this.msg, searchType: 0};
+            return {context: this.msg, searchType: 0, isSelected: false};
         },
-        props: {
-            activeName: null,
-            storeName: null
+        props: ['activeName', 'storeName', 'isOpera', 'index'],
+        watch: {
+            isOpera: function (val) {
+                this.isSelected = this.index === val;
+            }
         },
         methods: {
             operation: function(){
-
+                this.isSelected = !this.isSelected;
+                this.$emit("changed", this.index);
             },
             join: function () {
 
@@ -49,6 +62,8 @@
         width: 100%;
         display: inline-block;
         border-bottom: 1px solid #999;
+        overflow: hidden;
+        margin-top: -4px;
     }
 
     .activeInfo{
@@ -66,7 +81,42 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background-color: #2c3e50;
-        opacity: 0.8
+        background-color: #444;
+        opacity: 0.4;
+    }
+
+    .operation{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: -webkit-flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .join{
+        float: left;
+        background-color: #ffffff;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 40px;
+        div:first-child{
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        div:last-child{
+            font-size: 12px;
+        }
+    }
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .3s cubic-bezier(1.0, 2.0, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to {
+        transform: translateX(100%);
+        opacity: 0;
     }
 </style>
