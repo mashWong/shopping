@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <img src="../assets/dragon.png">
+        <SearchHome></SearchHome>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    import SearchHome from '@/components/SearchHome.vue'
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'home',
+        components: {
+            SearchHome
+        }
+    }
 </script>
+
+<style scoped lang="scss">
+    #nav {
+        width: calc(100% - 20px);
+        margin: 10px;
+        display: inline-block;
+        text-align: left;
+        a {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+            float: left;
+            padding-left: 10px;
+        }
+    }
+</style>

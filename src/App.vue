@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" v-show="this.$route.name == 'Home'">
+      <router-link to="/join">我的参与</router-link>
+      <router-link to="/follow">我的关注</router-link>
     </div>
     <router-view/>
   </div>
@@ -17,13 +17,16 @@
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  width: calc(100% - 20px);
+  margin: 10px;
+  display: inline-block;
+  text-align: left;
   a {
     font-weight: bold;
     color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    font-size: 14px;
+    float: left;
+    padding-left: 10px;
   }
 }
 </style>

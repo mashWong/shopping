@@ -1,21 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import About from './views/About.vue'
+import Home from './views/Home'
+import details from './views/details.vue'
+import join from './views/join.vue'
+import follow from './views/follow.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
-    }
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/details/:context',
+            name: 'details',
+            component: details
+        },
+        {
+            path: '/join',
+            name: 'join',
+            component: join
+        },
+        {
+            path: '/follow',
+            name: 'follow',
+            component: follow
+        }
+    ]
 })
