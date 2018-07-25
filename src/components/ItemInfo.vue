@@ -13,11 +13,11 @@
             <div v-if="isSelected" class="operation">
                 <div class="join">
                     <div class="fa fa-heart" style="color: red"></div>
-                    <div @click="join()">参加</div>
+                    <div @click.stop="join()">参加</div>
                 </div>
                 <div class="join">
                     <div class="fa fa-star" style="color: #4395ff;"></div>
-                    <div @click="view()">查看活动</div>
+                    <div @click.stop="view()">查看活动</div>
                 </div>
             </div>
         </transition>
