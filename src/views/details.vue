@@ -5,7 +5,7 @@
             <searchDetails :msg="context"></searchDetails>
         </div>
         <div class="items">
-            <ItemInfo v-for="(item, index) in 7" @changed="changed"
+            <ItemInfo v-for="(item, index) in 7" :key="item" @changed="changed"
                       :index="index" :isOpera=isOpera></ItemInfo>
         </div>
     </div>

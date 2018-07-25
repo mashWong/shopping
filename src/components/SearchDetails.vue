@@ -24,9 +24,7 @@
         },
         methods: {
             search: function () {
-                if (this.context === null || this.context === '') {
-
-                } else {
+                if (this.context !== null && this.context !== '') {
                     this.$router.push({name: 'details', params: {context: this.context}});
                 }
             }
