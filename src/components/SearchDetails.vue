@@ -14,13 +14,46 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: 'SearchDetails',
         data: function () {
-            return {context: this.msg, searchType: 0};
+            return {
+                context: this.msg, searchType: 0, param: {}, params: {
+                    longitude: 19.4,
+                    commodityName: "苹果",
+                    latitude: 19.6,
+                    page: 1,
+                    rows: 1,
+                    distance: 3
+                }
+            };
         },
         props: {
             msg: null
+        },
+        created: function () {
+            // const querystring = require('querystring');
+            axios.post('promotion/getslorPromotion', querystring.stringify({slorPromotion: JSON.stringify(this.params)}))
+                .then((response) => {
+                    console.log(response.data)
+                })
+            // axios({
+            //     method: "post",
+            //     url: "promotion/getslorPromotion",
+            //     data: {slorPromotion: JSON.stringify(this.params)},
+            //     transformRequest: [function (data) {
+            //         let ret = '';
+            //         for (let it in data) {
+            //             ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            //         }
+            //         return ret
+            //     }],
+            //     headers:{
+            //         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
+            //     }
+            // })
         },
         methods: {
             search: function () {
@@ -37,11 +70,13 @@
         width: calc(100% - 60px);
         display: inline-block;
         float: left;
-        div {
-            width: 34%;
-            float: left;
-            position: relative;
-        }
+
+    div {
+        width: 34%;
+        float: left;
+        position: relative;
+    }
+
     }
 
     i {
