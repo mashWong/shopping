@@ -1,7 +1,7 @@
 <template>
     <div class="swiper-container" @touchend="reStart">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(str, index) in listImg" :key="index"
+            <div class="swiper-slide" v-for="(str, $index) in listImg" :key="$index"
                  :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>
         </div>
         <div class="swiper-pagination swiper-pagination-white"></div>
@@ -28,6 +28,7 @@
         },
         methods: {
             reStart: function () {
+                if (this.listImg.length === 1) return false;
                 if (this.swiper) this.swiper.destroy(true, false);
                 this.swiper = new Swiper('.swiper-container', {
                     pagination: {
@@ -39,7 +40,6 @@
                     autoplay: {
                         delay: 1000
                     },
-                    on: {}
                 });
             }
         }

@@ -1,12 +1,13 @@
 <template>
     <div class="activeDiv" @click="operation">
-        <img src="../assets/dragon.png">
+        <img :src="info.img">
+        <!--<img src="../assets/dragon.png" v-if="info.img">-->
         <div class="activeInfo">
             <span class="activeName" v-text="info.name"></span>
             <span class="storeName" v-text="info.shopName">广惠超市</span>
             <span class="goodsName" v-text="info.commodityName">红富士苹果</span>
-            <span class="price">原价<i v-text="info.rice.toFixed(2)"></i>元</span>
-            <span class="activePrice">优惠价格<i v-text="info.quotaRice.toFixed(2)"></i>元</span>
+            <!--<span class="price">原价<i v-text="info.rice.toFixed(2)"></i>元</span>-->
+            <!--<span class="activePrice">优惠价格<i v-text="info.quotaRice.toFixed(2)"></i>元</span>-->
         </div>
         <div class="operationDiv" v-if="isSelected"></div>
         <transition name="slide-fade">
