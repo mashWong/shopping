@@ -3,15 +3,6 @@
         <div class="searchNav">
             <GoBack></GoBack>
         </div>
-        <div class="backgroundNav">
-            <img src="../assets/background.jpg">
-        </div>
-        <div class="menuNav" :style="{'position': searchBarFixed?'fixed':''}">
-            <div v-for="(item, index) in 8" :key="item" @click="selectStore(index)"
-                :style="{'background': whichStore==index?'#fff':'#f5f6f7'}">
-                <span>广惠超市</span>
-            </div>
-        </div>
         <div class="items">
             <ItemInfo v-for="(item, index) in 7" @changed="changed"
                       :index="index" :isOpera=isOpera></ItemInfo>

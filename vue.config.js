@@ -4,7 +4,7 @@ module.exports = {
     // 输出文件目录
     outputDir: 'dist',
     // eslint-loader 是否在保存的时候检查
-    lintOnSave: true,
+    // lintOnSave: true,
     // use the full build with in-browser compiler?
     // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
     // compiler: false,
@@ -30,7 +30,7 @@ module.exports = {
     },
     // use thread-loader for babel & TS in production build
     // enabled by default if the machine has more than 1 cores
-    parallel: require('os').cpus().length > 1,
+    // parallel: require('os').cpus().length > 1,
     // 是否启用dll
     // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#dll-mode
     // dll: false,
@@ -39,12 +39,11 @@ module.exports = {
     // pwa: {},
     // webpack-dev-server 相关配置
     devServer: {
-        open: process.platform === 'darwin',
+        // open: process.platform === 'darwin',
         host: '0.0.0.0',
-        disableHostCheck: true,
+        // disableHostCheck: true,
         port: 8080,
-        https: true,
-        hotOnly: false,
+        https: false,
         proxy: {
             "/": {
                 "target": "https://www.shennonggouwu.com/permissionsUsers",

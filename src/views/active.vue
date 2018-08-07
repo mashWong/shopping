@@ -4,32 +4,85 @@
             <GoBack></GoBack>
         </div>
         <div class="backgroundNav">
-            <img src="../assets/background.jpg">
+            <slider :listImg="sliders"></slider>
         </div>
         <div class="items">
-            <ItemInfo v-for="(item, index) in 7" :key="item" :onlyShow="true"></ItemInfo>
+            <goodsInfo v-for="(item, index) in info" :key="index" :info="item"></goodsInfo>
         </div>
         <div class="footNav">
-            <div>关注该商铺</div>
-            <div>参与活动</div>
+            <div @click="followShop">
+                <span v-show="followed">已关注该商铺</span>
+                <span v-show="!followed">关注该商铺</span>
+            </div>
+            <div @click="join">
+                <span v-show="joined">已参与该活动</span>
+                <span v-show="!joined">参与活动</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import GoBack from '../components/GoBack'
-    import ItemInfo from '../components/ItemInfo'
+    import goodsInfo from '../components/goodsInfo'
+    import slider from '../components/slider'
+    import axios from 'axios'
 
     export default {
         data: function () {
-            return {context: null, isOpera: false};
+            return {
+                id: null,   // 活动Id
+                info: [],
+                context: null,
+                isOpera: false,
+                shopId: null,
+                business: null,
+                sliders: [],
+                followed: false,
+                joined: false
+            };
         },
         components: {
             GoBack,
-            ItemInfo
+            goodsInfo,
+            slider
+        },
+        created: function(){
+            this.id = this.$route.params.id;
+            let param = {
+                id: this.id,
+                page: 1,
+                rows: 10,
+            };
+            axios.post('promotion/getReturnActivity', param)
+                .then((response) => {
+                    this.info = response.data.data.returnPaging.data;
+                    this.shopId = this.info[0].shopId;
+                    this.business = response.data.data.business;
+                    for(const i in this.info){
+                        this.sliders.push({'url': this.info[i].img});
+                    }
+                })
         },
         methods: {
-
+            followShop: function () {
+                let param = {
+                    shopId: this.shopId,
+                    uid: 546548465456,
+                    business: this.business,
+                };
+                axios.post('promotion/followShop', param)
+                    .then((response) => {
+                        this.followed = true;
+                    })
+            },
+            join: function () {
+                axios.post('promotion/participate',
+                    {"promotionId": this.$route.params.id, userId: '546548465456'})
+                    .then((response) => {
+                        this.joined = true;
+                    })
+            }
         }
     }
 </script>
@@ -47,14 +100,14 @@
         padding-top: 10px;
         padding-bottom: 50px;
     }
-    .backgroundNav{
-        width: 100%;
-        height: 240px;
-        img{
-            width: 100%;
-            height: 100%;
-        }
-    }
+    /*.backgroundNav{*/
+        /*width: 100%;*/
+        /*height: 240px;*/
+        /*img{*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+        /*}*/
+    /*}*/
     .footNav{
         position: fixed;
         width: 100%;

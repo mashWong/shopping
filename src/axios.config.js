@@ -1,5 +1,5 @@
 import axios from 'axios'
-console.log('asdasd');
+
 // 请求的拦截器
 axios.interceptors.request.use(function (config) {
     const token = localStorage.getItem('token');
@@ -16,13 +16,14 @@ axios.interceptors.request.use(function (config) {
         //     }
         //     return ret
         // }];
-        // let data = qs.parse(config.data);
-        //
-        // config.data = qs.stringify({
-        //     token: token,
-        //     uid: uid,
-        //     ...data
-        // })
+        const qs = require('qs');
+        let data = qs.parse(config.data);
+
+        config.data = qs.stringify({
+            // token: token,
+            // uid: uid,
+            ...data
+        })
     } else if(config.method === 'get') {
         config.params = {
             token: token,

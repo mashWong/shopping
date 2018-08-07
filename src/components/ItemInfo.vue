@@ -2,17 +2,17 @@
     <div class="activeDiv" @click="operation">
         <img src="../assets/dragon.png">
         <div class="activeInfo">
-            <span class="activeName">广惠超市水果大处理</span>
-            <span class="storeName">广惠超市</span>
-            <span class="goodsName">红富士苹果</span>
-            <span class="price">原价<i>5.8</i>元</span>
-            <span class="activePrice">优惠价格<i>3.8</i>元</span>
+            <span class="activeName" v-text="info.name"></span>
+            <span class="storeName" v-text="info.shopName">广惠超市</span>
+            <span class="goodsName" v-text="info.commodityName">红富士苹果</span>
+            <span class="price">原价<i v-text="info.rice.toFixed(2)"></i>元</span>
+            <span class="activePrice">优惠价格<i v-text="info.quotaRice.toFixed(2)"></i>元</span>
         </div>
         <div class="operationDiv" v-if="isSelected"></div>
         <transition name="slide-fade">
             <div v-if="isSelected" class="operation">
                 <div class="join">
-                    <div class="fa fa-heart" style="color: red"></div>
+                    <div class="fa fa-heart-o"  style="color: red"></div>
                     <div @click.stop="join()">参加</div>
                 </div>
                 <div class="join">
@@ -25,12 +25,18 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: 'ItemInfo',
         data: function () {
-            return {context: this.msg, searchType: 0, isSelected: false};
+            return {
+                context: this.msg,
+                searchType: 0,
+                isSelected: false
+            };
         },
-        props: ['activeName', 'storeName', 'isOpera', 'index', 'onlyShow'],
+        props: ['info', 'activeName', 'storeName', 'isOpera', 'index', 'onlyShow'],
         watch: {
             isOpera: function (val) {
                 this.isSelected = this.index === val;
@@ -43,10 +49,14 @@
                 this.$emit("changed", this.index);
             },
             join: function () {
-
+                axios.post('promotion/participate',
+                    {"promotionId": this.info.id, userId: '546548465456'})
+                    .then((response) => {
+                        this.$emit("searchData", response.data.data);
+                    })
             },
             view: function () {
-                this.$router.push({name: 'active', params: {id: "12"}});
+                this.$router.push({name: 'active', params: {id: this.info.id}});
             }
         }
     }

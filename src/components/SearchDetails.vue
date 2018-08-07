@@ -20,12 +20,14 @@
         name: 'SearchDetails',
         data: function () {
             return {
-                context: this.msg, searchType: 0, param: {}, params: {
+                context: this.msg,
+                searchType: 0,
+                param: {}, params: {
                     longitude: 19.4,
                     commodityName: "苹果",
                     latitude: 19.6,
                     page: 1,
-                    rows: 1,
+                    rows: 10,
                     distance: 3
                 }
             };
@@ -34,31 +36,18 @@
             msg: null
         },
         created: function () {
-            // const querystring = require('querystring');
-            axios.post('promotion/getslorPromotion', querystring.stringify({slorPromotion: JSON.stringify(this.params)}))
-                .then((response) => {
-                    console.log(response.data)
-                })
-            // axios({
-            //     method: "post",
-            //     url: "promotion/getslorPromotion",
-            //     data: {slorPromotion: JSON.stringify(this.params)},
-            //     transformRequest: [function (data) {
-            //         let ret = '';
-            //         for (let it in data) {
-            //             ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-            //         }
-            //         return ret
-            //     }],
-            //     headers:{
-            //         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
-            //     }
-            // })
+            this.search();
         },
         methods: {
             search: function () {
                 if (this.context !== null && this.context !== '') {
-                    this.$router.push({name: 'details', params: {context: this.context}});
+                    this.params.commodityName = this.context;
+                    axios.post('promotion/getslorPromotion',
+                        {"slorPromotion": JSON.stringify(this.params)})
+                        .then((response) => {
+                            this.$emit("searchData", response.data.data);
+                            console.log(response.data.data)
+                        })
                 }
             }
         }
