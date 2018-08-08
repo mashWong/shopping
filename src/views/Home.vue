@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <img src="../assets/dragon.png">
+        <img src="../assets/logo.jpg">
         <SearchHome></SearchHome>
     </div>
 </template>
@@ -17,6 +17,9 @@
 </script>
 
 <style scoped lang="scss">
+    img{
+        width: 140px;
+    }
     #nav {
         width: calc(100% - 20px);
         margin: 10px;

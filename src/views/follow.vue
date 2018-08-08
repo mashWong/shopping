@@ -9,22 +9,22 @@
     </div>
     <div id="menuNav" class="menuNav" :style="{position: searchBarFixed?'fixed':'', height: screenHeight + 'px'}">
       <div class="menuNavDiv">
-        <div v-for="(item, index) in info.myFollow" :key="index" @click="selectStore(index)"
+        <div v-for="(item, index) in info.myFollow" :key="index" @click="selectStore(index, item.id)"
              :style="{'background': whichStore==index?'#fff':'#f5f6f7'}">
           <span v-text="item.shopName"></span>
         </div>
       </div>
     </div>
     <div id="items" class="items" :style="{ minHeight: (screenHeight - 8) + 'px' }">
-      <ItemInfo v-for="(item, index) in activeInfo" :key="index" @changed="changed"
-                :info="item" :index="index" :isOpera=isOpera></ItemInfo>
+      <JoinInfo v-for="(item, index) in activeInfo" :key="index" @changed="changed"
+                :info="item" :index="index" :isOpera=isOpera></JoinInfo>
     </div>
   </div>
 </template>
 
 <script>
     import GoBack from '../components/GoBack'
-    import ItemInfo from '../components/ItemInfo'
+    import JoinInfo from '../components/myJoinInfo'
     import slider from '../components/slider'
     import axios from 'axios'
 
@@ -43,7 +43,7 @@
         },
         components: {
             GoBack,
-            ItemInfo,
+            JoinInfo,
             slider
         },
         created: function(){
@@ -53,7 +53,7 @@
                     for(const i in this.info.banner){
                         this.sliders.push({'url': this.info.banner[i]});
                     }
-                    this.getFirstShop();
+                    this.getShop(this.info.myFollow[0].id);
                 })
         },
         mounted () {
@@ -67,9 +67,9 @@
             }
         },
         methods: {
-            getFirstShop: function(){
+            getShop: function(id){
                 let param = {
-                    id: this.info.myFollow[0].id,
+                    id: id,
                     uid: '546548465456',
                     page: 1,
                     rows: 10
@@ -87,8 +87,9 @@
             changed: function (val) {
                 this.isOpera = val;
             },
-            selectStore: function (index) {
+            selectStore: function (index, id) {
                 this.whichStore = index;
+                this.getShop(id);
             }
         }
     }

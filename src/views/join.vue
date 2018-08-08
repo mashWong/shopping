@@ -4,37 +4,39 @@
             <GoBack></GoBack>
         </div>
         <div class="items">
-            <ItemInfo v-for="(item, index) in 7" @changed="changed"
-                      :index="index" :isOpera=isOpera></ItemInfo>
+            <JoinInfo v-for="(item, index) in info" @changed="changed"
+                      :info="item" :index="index" :isOpera=isOpera></JoinInfo>
         </div>
     </div>
 </template>
 
 <script>
     import GoBack from '../components/GoBack'
-    import ItemInfo from '../components/ItemInfo'
+    import JoinInfo from '../components/myJoinInfo'
+    import axios from 'axios'
 
     export default {
         data: function () {
-            return {context: null, isOpera: false, whichStore: 0, searchBarFixed: false};
+            return {info: [], isOpera: false};
         },
         components: {
             GoBack,
-            ItemInfo
+            JoinInfo
         },
-        mounted () {
-            window.addEventListener('scroll', this.handleScroll)
+        created: function(){
+            const params = {
+                // id: null,
+                uid: '546548465456',
+                page: 1,
+                rows: 10,
+            };
+            axios.post('promotion/getByShopId', params)
+                .then((response) => {
+                    this.info = response.data.data.data;
+                    console.log(this.info)
+                })
         },
         methods: {
-            handleScroll: function(){
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                let offsetTop = document.querySelector('.items').offsetTop;
-                if (scrollTop > offsetTop) {
-                    this.searchBarFixed = true
-                } else {
-                    this.searchBarFixed = false
-                }
-            },
             changed: function (val) {
                 this.isOpera = val;
             },
@@ -48,7 +50,7 @@
 <style scoped lang="scss">
     .details{
         display: inline-block;
-        background-color: #f5f6f7;
+        width: 100%;
     }
     .searchNav {
         position: fixed;
@@ -69,8 +71,6 @@
         }
     }
     .items {
-        float: right;
-        width: calc(100% - 80px);
         padding-top: 4px;
     }
 

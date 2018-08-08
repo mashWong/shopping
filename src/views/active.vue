@@ -57,10 +57,13 @@
             axios.post('promotion/getReturnActivity', param)
                 .then((response) => {
                     this.info = response.data.data.returnPaging.data;
-                    this.shopId = this.info[0].shopId;
+                    this.pInfo = response.data.data.list;
+                    if(this.info.length > 0){
+                        this.shopId = this.info[0].shopId;
+                    }
                     this.business = response.data.data.business;
-                    for(const i in this.info){
-                        this.sliders.push({'url': this.info[i].img});
+                    for(const i in this.pInfo){
+                        this.sliders.push({'url': this.pInfo[i]});
                     }
                 })
         },
@@ -100,14 +103,6 @@
         padding-top: 10px;
         padding-bottom: 50px;
     }
-    /*.backgroundNav{*/
-        /*width: 100%;*/
-        /*height: 240px;*/
-        /*img{*/
-            /*width: 100%;*/
-            /*height: 100%;*/
-        /*}*/
-    /*}*/
     .footNav{
         position: fixed;
         width: 100%;
