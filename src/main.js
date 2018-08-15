@@ -15,3 +15,16 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app');
+
+Vue.prototype.uId = "546548465456";
+axios.get('login/dynamic?url=' + window.location.href)
+    .then((response) => {
+        if(response.data){
+            Vue.prototype.uId = "546548465456";
+        } else {
+            alert("登陆失败")
+        }
+    })
+    .catch(function(err){
+        alert("登陆失败" + err)
+    });

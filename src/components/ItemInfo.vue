@@ -51,7 +51,7 @@
             },
             join: function () {
                 axios.post('promotion/participate',
-                    {"promotionId": this.info.id, userId: '546548465456'})
+                    {"promotionId": this.info.id, userId: this.uId})
                     .then((response) => {
                         this.$emit("searchData", response.data.data);
                     })

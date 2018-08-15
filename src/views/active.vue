@@ -71,7 +71,7 @@
             followShop: function () {
                 let param = {
                     shopId: this.shopId,
-                    uid: 546548465456,
+                    uid: this.uId,
                     business: this.business,
                 };
                 axios.post('promotion/followShop', param)
@@ -80,8 +80,9 @@
                     })
             },
             join: function () {
+                console.log(this.uId);
                 axios.post('promotion/participate',
-                    {"promotionId": this.$route.params.id, userId: '546548465456'})
+                    {"promotionId": this.$route.params.id, userId: this.uId})
                     .then((response) => {
                         this.joined = true;
                     })

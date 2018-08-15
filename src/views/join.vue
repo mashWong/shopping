@@ -26,7 +26,7 @@
         created: function(){
             const params = {
                 // id: null,
-                uid: '546548465456',
+                uid: this.uId,
                 page: 1,
                 rows: 10,
             };

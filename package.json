@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "es6-promise": "^4.2.4",
     "querystring": "^0.2.0",
     "swiper": "^4.3.5",
     "vue": "^2.5.16",

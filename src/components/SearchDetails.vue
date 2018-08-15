@@ -36,9 +36,21 @@
             msg: null
         },
         created: function () {
-            this.search();
+            this.getLocation();
         },
         methods: {
+            getLocation: function () {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(this.showLocation);
+                } else {
+                    console.log('你的浏览器不支持当前地理位置信息获取')
+                }
+            },
+            showLocation: function (position) {
+                this.params.latitude = position.coords.latitude;
+                this.params.longitude = position.coords.longitude;
+                this.search();
+            },
             search: function () {
                 if (this.context !== null && this.context !== '') {
                     this.params.commodityName = this.context;
@@ -46,7 +58,6 @@
                         {"slorPromotion": JSON.stringify(this.params)})
                         .then((response) => {
                             this.$emit("searchData", response.data.data);
-                            console.log(response.data.data)
                         })
                 }
             }
