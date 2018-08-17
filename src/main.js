@@ -17,10 +17,10 @@ new Vue({
 }).$mount('#app');
 
 Vue.prototype.uId = "546548465456";
-axios.get('login/dynamic?url=' + window.location.href)
+axios.get('permissionsUsers/login/AuthorizationMode')
     .then((response) => {
-        if(response.data){
-            Vue.prototype.uId = "546548465456";
+        if(response.data.data.uid){
+            Vue.prototype.uId = response.data.data.uid;
         } else {
             alert("登陆失败")
         }
