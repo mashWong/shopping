@@ -54,7 +54,7 @@
             search: function () {
                 if (this.context !== null && this.context !== '') {
                     this.params.commodityName = this.context;
-                    axios.post('promotion/getslorPromotion',
+                    axios.post('permissionsUsers/promotion/getslorPromotion',
                         {"slorPromotion": JSON.stringify(this.params)})
                         .then((response) => {
                             this.$emit("searchData", response.data.data);

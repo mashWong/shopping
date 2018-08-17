@@ -50,7 +50,7 @@
                 this.$emit("changed", this.index);
             },
             join: function () {
-                axios.post('promotion/participate',
+                axios.post('permissionsUsers/promotion/participate',
                     {"promotionId": this.info.id, userId: this.uId})
                     .then((response) => {
                         this.$emit("searchData", response.data.data);

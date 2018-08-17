@@ -46,7 +46,7 @@ module.exports = {
         https: false,
         proxy: {
             "/": {
-                "target": "https://www.shennonggouwu.com/permissionsUsers",
+                "target": "https://www.shennonggouwu.com/",
                 "changeOrigin": true,
             }
         },

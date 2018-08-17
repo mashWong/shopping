@@ -54,7 +54,7 @@
                 page: 1,
                 rows: 10,
             };
-            axios.post('promotion/getReturnActivity', param)
+            axios.post('permissionsUsers/promotion/getReturnActivity', param)
                 .then((response) => {
                     this.info = response.data.data.returnPaging.data;
                     this.pInfo = response.data.data.list;
@@ -74,14 +74,14 @@
                     uid: this.uId,
                     business: this.business,
                 };
-                axios.post('promotion/followShop', param)
+                axios.post('permissionsUsers/promotion/followShop', param)
                     .then((response) => {
                         this.followed = true;
                     })
             },
             join: function () {
                 console.log(this.uId);
-                axios.post('promotion/participate',
+                axios.post('permissionsUsers/promotion/participate',
                     {"promotionId": this.$route.params.id, userId: this.uId})
                     .then((response) => {
                         this.joined = true;

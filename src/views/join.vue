@@ -30,7 +30,7 @@
                 page: 1,
                 rows: 10,
             };
-            axios.post('promotion/getByShopId', params)
+            axios.post('permissionsUsers/promotion/getByShopId', params)
                 .then((response) => {
                     this.info = response.data.data.data;
                     console.log(this.info)

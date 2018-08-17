@@ -47,7 +47,7 @@
             slider
         },
         created: function(){
-            axios.post('promotion/selectMyfollow',{uid: this.uId})
+            axios.post('permissionsUsers/promotion/selectMyfollow',{uid: this.uId})
                 .then((response) => {
                     this.info = response.data.data;
                     for(const i in this.info.banner){
@@ -74,7 +74,7 @@
                     page: 1,
                     rows: 10
                 };
-                axios.post('promotion/getByShopId', param)
+                axios.post('permissionsUsers/promotion/getByShopId', param)
                     .then((response) => {
                         this.activeInfo = response.data.data.data;
                     })
