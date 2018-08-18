@@ -16,13 +16,14 @@ new Vue({
     render: h => h(App)
 }).$mount('#app');
 
-Vue.prototype.uId = "546548465456";
-axios.get('permissionsUsers/login/AuthorizationMode')
+// Vue.prototype.uId = "546548465456";
+axios.get('permissionsUsers/login/getSignatures')
     .then((response) => {
-        if(response.data.data.uid){
-            Vue.prototype.uId = response.data.data.uid;
+        if(response.data.data.id){
+            // alert("登陆成功"+response.data.data.id);
+            Vue.prototype.uId = response.data.data.id;
         } else {
-            alert("登陆失败")
+            alert("登陆失败" + response.data.data.id)
         }
     })
     .catch(function(err){

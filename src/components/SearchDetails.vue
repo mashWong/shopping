@@ -4,6 +4,8 @@
             <input type="text" v-model="context"/>
             <i class="fa fa-search" @click="search()"></i>
         </div>
+        <!--<span>{{params.latitude}}</span>/-->
+        <!--<span>{{params.longitude}}</span>-->
         <select v-model="searchType">
             <option value="0">水果</option>
             <option value="1">蔬菜</option>
