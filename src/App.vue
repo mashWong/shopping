@@ -4,9 +4,20 @@
       <router-link to="/join">我的参与</router-link>
       <router-link to="/follow">我的关注</router-link>
     </div>
+    <PopBox v-show="this.$route.name == 'Home'"></PopBox>
     <router-view/>
   </div>
 </template>
+
+<script>
+  import PopBox from './views/PopBox';
+    export default {
+        name: 'app',
+        components: {
+            PopBox
+        }
+    }
+</script>
 
 <style lang="scss">
   body{
@@ -25,6 +36,7 @@
   margin: 10px;
   display: inline-block;
   text-align: left;
+  float: left;
   a {
     font-weight: bold;
     color: #2c3e50;
@@ -33,4 +45,8 @@
     padding-left: 10px;
   }
 }
+  .doJoin{
+    float: right;
+    margin-right: 10px;
+  }
 </style>
